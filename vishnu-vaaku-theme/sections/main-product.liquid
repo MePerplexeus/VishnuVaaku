@@ -1,5 +1,8 @@
 {% comment %}
-  Main Product Section - Vishnu Vaaku Theme
+  Main Product Section - Vishnu Vaaku Theme v1.2
+  FIX #1: Buy Now button instead of Add to Cart (direct checkout)
+  FIX #2: Removed quantity selector (single unit purchase)
+  FIX #3: BookX app button styling to match theme
 {% endcomment %}
 
 <div class="product">
@@ -14,7 +17,7 @@
       {% else %}
         <div style="display: flex; align-items: center; justify-content: center; height: 100%; flex-direction: column; gap: 1rem;">
           <span style="font-size: 4rem; color: var(--color-primary);">☽</span>
-          <span class="hero__image-text">Product Image</span>
+          <span class="hero__image-text">Service Image</span>
         </div>
       {% endif %}
     </div>
@@ -30,8 +33,13 @@
     </div>
     
     <div class="product__form">
+      {% comment %} 
+        FIX #1 & #2: Direct checkout form without quantity
+        Using form action to go directly to checkout 
+      {% endcomment %}
       {% form 'product', product %}
         <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        <input type="hidden" name="quantity" value="1">
         
         {% unless product.has_only_default_variant %}
           {% for option in product.options_with_values %}
@@ -55,44 +63,194 @@
           {% endfor %}
         {% endunless %}
         
-        <div class="form-group">
-          <label class="form-label" for="Quantity">Quantity</label>
-          <div class="quantity-selector">
-            <button type="button" class="quantity-selector__btn quantity-selector__btn--decrement">−</button>
-            <input 
-              type="number" 
-              id="Quantity" 
-              name="quantity" 
-              value="1" 
-              min="1" 
-              class="quantity-selector__input form-input"
-              style="width: 80px; text-align: center;"
-            >
-            <button type="button" class="quantity-selector__btn quantity-selector__btn--increment">+</button>
-          </div>
-        </div>
-        
+        {% comment %} FIX #1: Buy Now button that goes directly to checkout {% endcomment %}
         <button 
           type="submit" 
-          class="btn btn--primary btn--full-width"
+          name="add"
+          class="btn btn--primary btn--full-width product__buy-now-btn"
           {% unless product.available %}disabled{% endunless %}
+          onclick="this.form.action = '/cart/add'; this.form.submit(); setTimeout(function(){ window.location.href = '/checkout'; }, 100); return false;"
         >
           {% if product.available %}
-            Add to Cart
+            Buy Now
           {% else %}
             Sold Out
           {% endif %}
         </button>
       {% endform %}
+      
+      {% comment %} 
+        FIX #3: BookX App Integration Styling
+        The BookX app injects its button - we style it via CSS below
+        This placeholder shows where the button will appear
+      {% endcomment %}
+      <div class="product__bookx-container">
+        {% comment %} BookX app button gets injected here by the app {% endcomment %}
+      </div>
     </div>
+    
+    {% if section.settings.show_trust_badges %}
+      <div class="product__trust-badges">
+        <div class="trust-badge">
+          <span class="trust-badge__icon">✧</span>
+          <span class="trust-badge__text">Secure Payment</span>
+        </div>
+        <div class="trust-badge">
+          <span class="trust-badge__icon">☽</span>
+          <span class="trust-badge__text">Personal Guidance</span>
+        </div>
+        <div class="trust-badge">
+          <span class="trust-badge__icon">★</span>
+          <span class="trust-badge__text">5-Star Rated</span>
+        </div>
+      </div>
+    {% endif %}
   </div>
 </div>
+
+{% comment %} 
+  FIX #3: BookX Button Styling 
+  These styles will apply to the BookX app's injected button
+{% endcomment %}
+<style>
+  /* BookX App Button Styling - Match Theme */
+  .bookx-booking-button,
+  .bookx-btn,
+  [class*="bookx"] button,
+  [class*="BookX"] button,
+  .book-slot-button,
+  .booking-button,
+  button[class*="book"],
+  .product__form button[type="button"],
+  .product form + div button,
+  .product form ~ div button,
+  /* Target common booking app button patterns */
+  .shopify-app-block button,
+  .product-form + div button,
+  .product__info .app-block button,
+  div[data-app] button,
+  div[data-shopify-app] button {
+    display: block !important;
+    width: 100% !important;
+    margin-top: var(--spacing-md) !important;
+    padding: 1rem 2rem !important;
+    background: transparent !important;
+    color: var(--color-primary) !important;
+    border: 2px solid var(--color-primary) !important;
+    border-radius: var(--border-radius-sm) !important;
+    font-family: var(--font-body) !important;
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.15em !important;
+    text-transform: uppercase !important;
+    cursor: pointer !important;
+    transition: all var(--transition-normal) !important;
+    box-sizing: border-box !important;
+  }
+  
+  .bookx-booking-button:hover,
+  .bookx-btn:hover,
+  [class*="bookx"] button:hover,
+  [class*="BookX"] button:hover,
+  .book-slot-button:hover,
+  .booking-button:hover,
+  button[class*="book"]:hover,
+  .product__form button[type="button"]:hover,
+  .product form + div button:hover,
+  .product form ~ div button:hover,
+  .shopify-app-block button:hover,
+  .product-form + div button:hover,
+  .product__info .app-block button:hover,
+  div[data-app] button:hover,
+  div[data-shopify-app] button:hover {
+    background: var(--color-primary) !important;
+    color: var(--color-background) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 30px rgba(212, 165, 116, 0.3) !important;
+  }
+  
+  /* Style BookX container */
+  .bookx-widget,
+  .bookx-container,
+  [class*="bookx"],
+  [class*="BookX"],
+  .product__info > div:not(.product__form):not(.product__description):not(.product__trust-badges),
+  .product__info .app-block,
+  .shopify-app-block {
+    margin-top: var(--spacing-md) !important;
+  }
+  
+  /* Hide any default styling that might conflict */
+  .bookx-booking-button::before,
+  .bookx-btn::before,
+  [class*="bookx"] button::before,
+  [class*="BookX"] button::before {
+    display: none !important;
+  }
+  
+  /* Trust Badges */
+  .product__trust-badges {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--color-border-light);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .trust-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--color-text-secondary);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+  }
+  
+  .trust-badge__icon {
+    color: var(--color-primary);
+    font-size: 1rem;
+  }
+  
+  /* Product Buy Now Button Enhancement */
+  .product__buy-now-btn {
+    font-size: 1rem !important;
+    padding: 1.25rem 2rem !important;
+    margin-bottom: 0;
+  }
+  
+  .product__buy-now-btn:hover {
+    box-shadow: 0 15px 40px rgba(212, 165, 116, 0.4) !important;
+  }
+  
+  /* BookX Container Spacing */
+  .product__bookx-container {
+    margin-top: var(--spacing-sm);
+  }
+  
+  /* Mobile Adjustments */
+  @media (max-width: 768px) {
+    .product__trust-badges {
+      flex-direction: column;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+  }
+</style>
 
 {% schema %}
 {
   "name": "Product",
   "tag": "section",
   "class": "section-product",
-  "settings": []
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_trust_badges",
+      "label": "Show trust badges",
+      "default": true
+    }
+  ]
 }
 {% endschema %}

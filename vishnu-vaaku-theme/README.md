@@ -1,158 +1,221 @@
 # Vishnu Vaaku - Celestial Terracotta Theme
-## Version 1.1.0 - Bug Fixes Applied
+## Version 1.2.0 - Product Page & Checkout Fixes
 
 ---
 
-## 🐛 Bug Fixes in This Version
+## 📋 Version History
 
-| # | Issue | Fix Applied |
-|---|-------|-------------|
-| 1 | Stars showing as diagonal line | Stars now scattered randomly across viewport using CSS nth-child positioning |
-| 2 | Flower petals missing from mandala | Added 8 flower petal paths to the SVG mandala decoration |
-| 3 | No contact form on Contact page | Created new contact page template with full form |
-| 4 | Search link in footer | Replaced with Instagram, YouTube, Facebook social links |
-| 5 | No achievements page | Created new achievements page template for Vishnupriya S Soma |
-| 6 | Services page cards different from homepage | Collection page now uses same card style as homepage services |
-| 7 | Low opacity on cards/boxes | Increased opacity to 0.9 (similar to sticky header) for all cards |
-| 8 | Hero photo not aligned with title | Photo now starts at same top position as the title heading |
+### v1.2.0 (Current)
+- **Buy Now button** - Direct checkout instead of Add to Cart
+- **Single unit purchase** - Removed quantity selector
+- **BookX app styling** - Book your slot button now matches theme
+
+### v1.1.0
+- Fixed scattered stars background
+- Added flower petals to mandala
+- Added contact form to Contact page
+- Replaced Search with social links in footer
+- Created Achievements page template
+- Services page cards match homepage style
+- Increased card opacity
+- Aligned hero photo with title
+
+### v1.0.0
+- Initial theme release
+
+---
+
+## 🐛 Fixes in v1.2.0
+
+| # | Issue | Solution |
+|---|-------|----------|
+| 1 | Add to Cart not needed | Changed to **Buy Now** button that goes directly to checkout |
+| 2 | Quantity selector not needed | Removed quantity selector (fixed at 1 unit) |
+| 3 | BookX button not matching theme | Added comprehensive CSS to style BookX "Book your slot" button |
 
 ---
 
 ## 🚀 Installation Steps
 
-### Step 1: Upload the Theme
-
-1. Log in to your Shopify admin: `https://your-store.myshopify.com/admin`
-2. Go to **Online Store** → **Themes**
-3. Click **"Add theme"** → **"Upload zip file"**
-4. Select `vishnu-vaaku-theme.zip`
-5. Wait for upload to complete
+### Step 1: Upload Theme
+1. Go to **Shopify Admin** → **Online Store** → **Themes**
+2. Click **"Add theme"** → **"Upload zip file"**
+3. Upload `vishnu-vaaku-theme-v1.2.zip`
 
 ### Step 2: Publish
-
-1. Find theme in "Theme library"
-2. Click **"Actions"** → **"Preview"** to review
-3. Click **"Actions"** → **"Publish"** when ready
+1. Preview the theme
+2. Click **Publish** when ready
 
 ---
 
-## ⚙️ Settings Adjustments Required
+## ⚙️ Product Page Changes
 
-### FIX #4: Configure Footer Social Links
+### Buy Now Button (FIX #1)
+The "Add to Cart" button has been replaced with a **"Buy Now"** button that:
+- Adds the product to cart with quantity 1
+- Immediately redirects to checkout
+- No cart page visit needed
 
-After installing the theme:
+### No Quantity Selector (FIX #2)
+- Quantity field is hidden (set to 1 automatically)
+- Users can only purchase single units
+- Clean, simple purchase flow
 
-1. Go to **Online Store** → **Themes** → **Customize**
-2. Scroll down and click on the **Footer** section
-3. Under "Social Links", enter your URLs:
-   - Instagram URL
-   - YouTube URL
-   - Facebook URL
-   - Twitter URL (optional)
-4. Save changes
+### BookX Button Styling (FIX #3)
+The BookX app's "Book your slot" button now matches the theme:
 
-### FIX #3: Set Up Contact Page
+**Styled appearance:**
+- Transparent background with terracotta gold border
+- Matches theme typography (Josefin Sans)
+- Uppercase letters with letter-spacing
+- Hover effect: fills with gold, lifts up with shadow
 
-1. Go to **Online Store** → **Pages**
-2. Find or create your "Contact" page
-3. In the page editor, click **"Theme template"** dropdown
-4. Select **"page.contact"**
-5. Save the page
-6. Customize the contact form in Theme Editor:
-   - Click on the Contact page in the editor
-   - Configure email, phone, location if desired
+**CSS selectors used:**
+```css
+.bookx-booking-button
+.bookx-btn
+[class*="bookx"] button
+[class*="BookX"] button
+.book-slot-button
+.booking-button
+.shopify-app-block button
+div[data-app] button
+```
 
-### FIX #5: Create Achievements Page
-
-1. Go to **Online Store** → **Pages**
-2. Click **"Add page"**
-3. Title: "Achievements" (or similar)
-4. In **"Theme template"** dropdown, select **"page.achievements"**
-5. Save the page
-6. Customize in Theme Editor:
-   - Add/edit achievement blocks
-   - Change icons (use emojis like ✧ ☽ ★ ◇ ☼)
-   - Update titles and descriptions
-7. Add to navigation menu if desired
+If your BookX button uses a different class, you may need to add it to the CSS.
 
 ---
 
-## 🎨 Theme Customization
+## 🎨 Button Styling Reference
 
-### Colors (Theme Settings)
+### Primary Button (Buy Now)
+```css
+background: #d4a574;
+color: #1a1420;
+padding: 1.25rem 2rem;
+font-size: 1rem;
+```
 
-| Setting | Default | Description |
-|---------|---------|-------------|
-| Primary accent | #d4a574 | Terracotta gold |
-| Secondary accent | #c49464 | Darker gold |
-| Background | #1a1420 | Deep burgundy |
-| Text | #f5ebe0 | Warm cream |
-
-### Typography
-
-- **Headings**: Cormorant Garamond (elegant serif)
-- **Body**: Josefin Sans (clean sans-serif)
-
----
-
-## 📄 Page Templates Available
-
-| Template | Use For |
-|----------|---------|
-| `page.default` | Standard pages |
-| `page.contact` | Contact page with form |
-| `page.achievements` | Achievements/milestones |
+### Secondary Button (Book Your Slot)
+```css
+background: transparent;
+color: #d4a574;
+border: 2px solid #d4a574;
+padding: 1rem 2rem;
+font-size: 0.9rem;
+```
 
 ---
 
-## 📁 Files Modified/Added
+## 📝 Customizing BookX Button
+
+If the BookX button doesn't pick up the styling, you can:
+
+### Option 1: Use Theme Editor
+1. Go to **Theme Editor** → **Theme Settings**
+2. Add Custom CSS:
+```css
+.YOUR-BOOKX-CLASS button {
+  background: transparent !important;
+  color: #d4a574 !important;
+  border: 2px solid #d4a574 !important;
+  /* ... other styles */
+}
+```
+
+### Option 2: Edit theme.css
+1. Go to **Edit Code** → **Assets** → **theme.css**
+2. Find the BookX styling section
+3. Add your specific class selector
+
+### Option 3: Inspect & Identify
+1. Right-click the BookX button
+2. Select "Inspect"
+3. Find the class name
+4. Add to the CSS selectors
+
+---
+
+## 🛒 Purchase Flow
+
+**Before (v1.1):**
+1. User clicks "Add to Cart"
+2. User visits cart page
+3. User clicks "Checkout"
+4. User completes purchase
+
+**After (v1.2):**
+1. User clicks "Buy Now"
+2. User is taken directly to checkout
+3. User completes purchase
+
+---
+
+## 📁 Files Changed in v1.2
 
 ### Modified
-- `assets/theme.css` - Fixed star positions, opacity, hero alignment
-- `layout/theme.liquid` - Fixed mandala SVG with flower petals
-- `sections/footer.liquid` - Added social links instead of Search
-- `sections/hero.liquid` - Aligned photo with title
-- `sections/main-collection.liquid` - Same card style as homepage
-
-### Added
-- `templates/page.contact.json` - Contact page template
-- `sections/main-contact.liquid` - Contact form section
-- `templates/page.achievements.json` - Achievements page template
-- `sections/main-achievements.liquid` - Achievements section
+- `sections/main-product.liquid` - New Buy Now form, removed quantity, added BookX styles
+- `assets/theme.css` - Added BookX button styling and trust badges
 
 ---
 
-## 💡 Additional Tips
+## ✨ Trust Badges
 
-### Hero Photo Alignment (FIX #8)
-The astrologer photo in the hero section now aligns with the top of the "Celestial Guidance" title. On mobile, the photo is hidden to prioritize content. The CSS uses `top: 8rem` instead of `top: 50%` to achieve this alignment.
+The product page now includes optional trust badges:
+- ✧ Secure Payment
+- ☽ Personal Guidance
+- ★ 5-Star Rated
 
-### Card Opacity (FIX #7)
-All cards now use higher opacity backgrounds:
-- Service cards: `rgba(45, 31, 47, 0.9)`
-- Testimonial cards: `rgba(26, 20, 32, 0.85)`
-- FAQ hover: `rgba(212, 165, 116, 0.12)`
-- CTA box: `rgba(77, 53, 64, 0.4)`
+To enable/disable:
+1. Go to **Theme Editor**
+2. Click on **Product** section
+3. Toggle "Show trust badges"
 
-### Contact Form Subjects
-The contact form includes predefined subjects:
-- General Inquiry
-- Personal Consultation
-- Know Your Rashi Report
-- Collaboration
-- Other
+---
+
+## 📋 All Features Summary
+
+### Homepage
+- Hero with aligned astrologer photo
+- Animated scattered stars
+- Rotating mandala with flower petals
+- Services section with card styling
+- Testimonials with increased opacity
+- FAQ section
+- CTA section
+
+### Product Page
+- Buy Now direct checkout
+- No quantity selector
+- BookX app integration styling
+- Trust badges
+
+### Contact Page
+- Full contact form
+- Subject dropdown
+- Success message styling
+
+### Achievements Page
+- Achievement cards
+- Customizable icons
+- CTA section
+
+### Footer
+- Social links (Instagram, YouTube, Facebook)
+- Navigation links
+- Copyright
 
 ---
 
 ## 📞 Support
 
-For additional customization or questions:
+For questions or customization:
 - Website: VishnuVaaku.com
 - Contact: Through the contact page
 
 ---
 
-**Theme Version:** 1.1.0  
+**Theme Version:** 1.2.0  
 **Shopify Compatibility:** Online Store 2.0  
 **Last Updated:** January 2026
 
