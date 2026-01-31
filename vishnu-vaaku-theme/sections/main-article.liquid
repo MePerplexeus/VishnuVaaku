@@ -1,0 +1,43 @@
+{% comment %}
+  Main Article Section - Vishnu Vaaku Theme
+{% endcomment %}
+
+<article>
+  <header class="article-header">
+    <p class="article-header__meta">
+      {{ article.published_at | date: '%B %d, %Y' }}
+      {% if article.author %}
+        • By {{ article.author }}
+      {% endif %}
+    </p>
+    <h1>{{ article.title }}</h1>
+  </header>
+  
+  {% if article.image != blank %}
+    <div style="max-width: 900px; margin: 0 auto var(--spacing-xl); padding: 0 var(--spacing-md);">
+      <img 
+        src="{{ article.image | image_url: width: 1200 }}" 
+        alt="{{ article.image.alt | default: article.title }}"
+        style="width: 100%; border-radius: var(--border-radius-xl);"
+        loading="eager"
+      >
+    </div>
+  {% endif %}
+  
+  <div class="article-content">
+    {{ article.content }}
+  </div>
+  
+  <div style="max-width: 700px; margin: var(--spacing-xl) auto; padding: 0 var(--spacing-md);">
+    <a href="{{ blog.url }}" class="btn btn--secondary">← Back to {{ blog.title }}</a>
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "Article",
+  "tag": "section",
+  "class": "section-article",
+  "settings": []
+}
+{% endschema %}

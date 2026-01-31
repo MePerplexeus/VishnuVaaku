@@ -1,0 +1,66 @@
+{% comment %}
+  Main Collection Section - Vishnu Vaaku Theme
+  FIX #6: Same card style as homepage services
+{% endcomment %}
+
+<div class="collection-header">
+  <p class="subheading">{{ section.settings.subheading | default: 'Services' }}</p>
+  <h1>{{ collection.title }}</h1>
+  {% if collection.description != blank %}
+    <p style="max-width: 600px; margin: var(--spacing-md) auto 0;">{{ collection.description }}</p>
+  {% endif %}
+</div>
+
+<div class="collection-grid">
+  {% for product in collection.products %}
+    <a href="{{ product.url }}" class="product-card">
+      <!-- Icon based on product index -->
+      <div class="product-card__icon">
+        {% if forloop.index == 1 %}☽{% elsif forloop.index == 2 %}✧{% elsif forloop.index == 3 %}★{% elsif forloop.index == 4 %}◇{% else %}☼{% endif %}
+      </div>
+      
+      <h3 class="product-card__title">{{ product.title }}</h3>
+      
+      <p class="product-card__description">
+        {{ product.description | strip_html | truncate: 150 }}
+      </p>
+      
+      <div class="product-card__footer">
+        <div>
+          <span class="product-card__price">{{ product.price | money }}</span>
+          {% if product.metafields.custom.duration %}
+            <span class="service-card__duration">/ {{ product.metafields.custom.duration }}</span>
+          {% endif %}
+        </div>
+        <span class="btn btn--outline" style="padding: 0.6rem 1.25rem; font-size: 0.7rem;">Book Now</span>
+      </div>
+    </a>
+  {% else %}
+    <div class="text-center" style="grid-column: 1 / -1; padding: var(--spacing-2xl);">
+      <p style="font-size: 1.2rem; color: var(--color-text-secondary);">No services found in this collection.</p>
+      <a href="{{ routes.root_url }}" class="btn btn--primary" style="margin-top: var(--spacing-md);">Return Home</a>
+    </div>
+  {% endfor %}
+</div>
+
+{% if paginate.pages > 1 %}
+  <div class="pagination text-center" style="padding: var(--spacing-lg) var(--spacing-md);">
+    {{ paginate | default_pagination }}
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Collection",
+  "tag": "section",
+  "class": "section-collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Services"
+    }
+  ]
+}
+{% endschema %}

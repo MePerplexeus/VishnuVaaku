@@ -1,0 +1,119 @@
+{% comment %}
+  Testimonials Section - Vishnu Vaaku Theme
+{% endcomment %}
+
+<section class="section section--dark">
+  <div class="section__header">
+    {% if section.settings.subheading != blank %}
+      <p class="subheading">{{ section.settings.subheading }}</p>
+    {% endif %}
+    
+    <h2 class="section__title">
+      {{ section.settings.heading_part1 | default: 'Client' }} 
+      <span class="text-accent text-italic">{{ section.settings.heading_part2 | default: 'Stories' }}</span>
+    </h2>
+  </div>
+  
+  <div class="testimonials-grid">
+    {% for block in section.blocks %}
+      <div class="testimonial-card" {{ block.shopify_attributes }}>
+        <div class="testimonial-card__stars">
+          {% for i in (1..5) %}
+            <span>★</span>
+          {% endfor %}
+        </div>
+        <div class="testimonial-card__quote">"</div>
+        <p class="testimonial-card__text">{{ block.settings.testimonial }}</p>
+        <p class="testimonial-card__author">{{ block.settings.author }}</p>
+        {% if block.settings.location != blank %}
+          <p class="testimonial-card__location">{{ block.settings.location }}</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "tag": "section",
+  "class": "section-testimonials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Testimonials"
+    },
+    {
+      "type": "text",
+      "id": "heading_part1",
+      "label": "Heading part 1",
+      "default": "Client"
+    },
+    {
+      "type": "text",
+      "id": "heading_part2",
+      "label": "Heading part 2 (italic)",
+      "default": "Stories"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "testimonial",
+          "label": "Testimonial text",
+          "default": "The consultation brought clarity to decisions I had been struggling with for months."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author name",
+          "default": "Priya M."
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Location (optional)",
+          "default": "Mumbai"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "The consultation brought clarity to decisions I had been struggling with for months. Vishnupriya has a gift for making complex astrological concepts accessible.",
+            "author": "Priya M.",
+            "location": "Mumbai"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "Vishnupriya's insights are remarkably accurate. Her modern approach to Vedic astrology resonates with today's seekers.",
+            "author": "Arjun K.",
+            "location": "Bangalore"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "Understanding my Rashi opened new perspectives on my relationships and career. Highly recommend her services.",
+            "author": "Meera S.",
+            "location": "Delhi"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

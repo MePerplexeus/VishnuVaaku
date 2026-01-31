@@ -1,0 +1,98 @@
+{% comment %}
+  Main Product Section - Vishnu Vaaku Theme
+{% endcomment %}
+
+<div class="product">
+  <div class="product__gallery">
+    <div class="product__main-image">
+      {% if product.featured_image != blank %}
+        <img 
+          src="{{ product.featured_image | image_url: width: 800 }}" 
+          alt="{{ product.featured_image.alt | default: product.title }}"
+          loading="eager"
+        >
+      {% else %}
+        <div style="display: flex; align-items: center; justify-content: center; height: 100%; flex-direction: column; gap: 1rem;">
+          <span style="font-size: 4rem; color: var(--color-primary);">☽</span>
+          <span class="hero__image-text">Product Image</span>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+  
+  <div class="product__info">
+    <p class="subheading">{{ product.type | default: 'Service' }}</p>
+    <h1 class="product__title">{{ product.title }}</h1>
+    <p class="product__price">{{ product.price | money }}</p>
+    
+    <div class="product__description">
+      {{ product.description }}
+    </div>
+    
+    <div class="product__form">
+      {% form 'product', product %}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        
+        {% unless product.has_only_default_variant %}
+          {% for option in product.options_with_values %}
+            <div class="form-group">
+              <label class="form-label" for="Option-{{ forloop.index }}">{{ option.name }}</label>
+              <select 
+                class="form-select" 
+                id="Option-{{ forloop.index }}" 
+                name="options[{{ option.name }}]"
+              >
+                {% for value in option.values %}
+                  <option 
+                    value="{{ value }}" 
+                    {% if option.selected_value == value %}selected{% endif %}
+                  >
+                    {{ value }}
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
+          {% endfor %}
+        {% endunless %}
+        
+        <div class="form-group">
+          <label class="form-label" for="Quantity">Quantity</label>
+          <div class="quantity-selector">
+            <button type="button" class="quantity-selector__btn quantity-selector__btn--decrement">−</button>
+            <input 
+              type="number" 
+              id="Quantity" 
+              name="quantity" 
+              value="1" 
+              min="1" 
+              class="quantity-selector__input form-input"
+              style="width: 80px; text-align: center;"
+            >
+            <button type="button" class="quantity-selector__btn quantity-selector__btn--increment">+</button>
+          </div>
+        </div>
+        
+        <button 
+          type="submit" 
+          class="btn btn--primary btn--full-width"
+          {% unless product.available %}disabled{% endunless %}
+        >
+          {% if product.available %}
+            Add to Cart
+          {% else %}
+            Sold Out
+          {% endif %}
+        </button>
+      {% endform %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product",
+  "tag": "section",
+  "class": "section-product",
+  "settings": []
+}
+{% endschema %}

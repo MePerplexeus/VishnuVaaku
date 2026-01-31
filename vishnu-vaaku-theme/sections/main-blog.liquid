@@ -1,0 +1,46 @@
+{% comment %}
+  Main Blog Section - Vishnu Vaaku Theme
+{% endcomment %}
+
+<div class="collection-header">
+  <p class="subheading">Insights</p>
+  <h1>{{ blog.title }}</h1>
+</div>
+
+<div class="blog-grid">
+  {% for article in blog.articles %}
+    <article class="blog-card">
+      {% if article.image != blank %}
+        <a href="{{ article.url }}" class="blog-card__image">
+          <img 
+            src="{{ article.image | image_url: width: 600 }}" 
+            alt="{{ article.image.alt | default: article.title }}"
+            loading="lazy"
+          >
+        </a>
+      {% endif %}
+      <div class="blog-card__content">
+        <p class="blog-card__date">{{ article.published_at | date: '%B %d, %Y' }}</p>
+        <h3 class="blog-card__title">
+          <a href="{{ article.url }}">{{ article.title }}</a>
+        </h3>
+        <p class="blog-card__excerpt">{{ article.excerpt_or_content | strip_html | truncate: 150 }}</p>
+      </div>
+    </article>
+  {% endfor %}
+</div>
+
+{% if paginate.pages > 1 %}
+  <div class="pagination">
+    {{ paginate | default_pagination }}
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Blog",
+  "tag": "section",
+  "class": "section-blog",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,131 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "subheading": "✧ Vedic Wisdom for Modern Lives ✧",
+        "heading_line1": "Celestial",
+        "heading_line2": "Guidance",
+        "description": "Navigate life's journey with ancient wisdom and cosmic insight. Personal consultations tailored to illuminate your unique path through the timeless science of Vedic astrology.",
+        "button_1_text": "Book Consultation",
+        "button_1_link": "",
+        "button_2_text": "Know Your Rashi",
+        "button_2_link": "",
+        "show_image": true
+      }
+    },
+    "about": {
+      "type": "about",
+      "settings": {
+        "subheading": "Your Guide",
+        "name_first": "Vishnupriya",
+        "name_last": "S Soma",
+        "description": "Blending ancient Vedic wisdom with contemporary understanding, I offer clarity through the celestial language of the stars. With a mindful, analytical approach, each consultation becomes a journey into your unique cosmic blueprint.",
+        "quote": "The stars speak to those who listen with patience and an open heart."
+      }
+    },
+    "featured-services": {
+      "type": "featured-collection",
+      "settings": {
+        "subheading": "Offerings",
+        "heading_part1": "Sacred",
+        "heading_part2": "Services",
+        "products_to_show": 2,
+        "show_view_all": true,
+        "view_all_text": "View All Services"
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {
+        "subheading": "Testimonials",
+        "heading_part1": "Client",
+        "heading_part2": "Stories"
+      },
+      "blocks": {
+        "testimonial-1": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "The consultation brought clarity to decisions I had been struggling with for months. Vishnupriya has a gift for making complex astrological concepts accessible.",
+            "author": "Priya M.",
+            "location": "Mumbai"
+          }
+        },
+        "testimonial-2": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "Vishnupriya's insights are remarkably accurate. Her modern approach to Vedic astrology resonates with today's seekers.",
+            "author": "Arjun K.",
+            "location": "Bangalore"
+          }
+        },
+        "testimonial-3": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "Understanding my Rashi opened new perspectives on my relationships and career. Highly recommend her services.",
+            "author": "Meera S.",
+            "location": "Delhi"
+          }
+        }
+      },
+      "block_order": ["testimonial-1", "testimonial-2", "testimonial-3"]
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {
+        "subheading": "Questions",
+        "heading_part1": "Frequently",
+        "heading_part2": "Asked"
+      },
+      "blocks": {
+        "faq-1": {
+          "type": "faq",
+          "settings": {
+            "question": "How long does a consultation take?",
+            "answer": "Personal consultations typically last 60 minutes, allowing ample time for detailed chart analysis and your questions."
+          }
+        },
+        "faq-2": {
+          "type": "faq",
+          "settings": {
+            "question": "What information do I need to provide?",
+            "answer": "Your birth date, exact birth time, and place of birth are required for accurate chart preparation."
+          }
+        },
+        "faq-3": {
+          "type": "faq",
+          "settings": {
+            "question": "Are consultations available in multiple languages?",
+            "answer": "Yes, consultations are available in English, Hindi, and Telugu."
+          }
+        },
+        "faq-4": {
+          "type": "faq",
+          "settings": {
+            "question": "How will I receive my Know Your Rashi report?",
+            "answer": "Your detailed digital report will be delivered to your email within 24-48 hours of purchase."
+          }
+        }
+      },
+      "block_order": ["faq-1", "faq-2", "faq-3", "faq-4"]
+    },
+    "cta": {
+      "type": "cta",
+      "settings": {
+        "heading_part1": "Begin Your",
+        "heading_part2": "Journey",
+        "description": "Ready to discover what the cosmos has written for you? Let's explore your celestial blueprint together.",
+        "button_text": "Schedule Consultation",
+        "button_link": ""
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "about",
+    "featured-services",
+    "testimonials",
+    "faq",
+    "cta"
+  ]
+}

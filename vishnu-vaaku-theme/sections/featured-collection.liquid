@@ -1,0 +1,133 @@
+{% comment %}
+  Featured Collection Section - Vishnu Vaaku Theme
+{% endcomment %}
+
+<section class="section">
+  <div class="section__header">
+    {% if section.settings.subheading != blank %}
+      <p class="subheading">{{ section.settings.subheading }}</p>
+    {% endif %}
+    
+    <h2 class="section__title">
+      {{ section.settings.heading_part1 | default: 'Sacred' }} 
+      <span class="text-accent text-italic">{{ section.settings.heading_part2 | default: 'Services' }}</span>
+    </h2>
+  </div>
+  
+  <div class="services-grid">
+    {% if section.settings.collection != blank %}
+      {% for product in section.settings.collection.products limit: section.settings.products_to_show %}
+        <a href="{{ product.url }}" class="service-card">
+          <div class="service-card__icon">
+            {% if forloop.first %}☽{% else %}✧{% endif %}
+          </div>
+          <h3 class="service-card__title">{{ product.title }}</h3>
+          <p class="service-card__description">{{ product.description | strip_html | truncate: 150 }}</p>
+          <div class="service-card__footer">
+            <div>
+              <span class="service-card__price">{{ product.price | money }}</span>
+              {% if product.metafields.custom.duration %}
+                <span class="service-card__duration">/ {{ product.metafields.custom.duration }}</span>
+              {% endif %}
+            </div>
+            <span class="btn btn--outline" style="padding: 0.6rem 1.25rem; font-size: 0.7rem;">Book Now</span>
+          </div>
+        </a>
+      {% endfor %}
+    {% else %}
+      <!-- Placeholder cards when no collection is selected -->
+      <div class="service-card">
+        <div class="service-card__icon">☽</div>
+        <h3 class="service-card__title">Personal Consultation</h3>
+        <p class="service-card__description">One-on-one voice or video sessions for in-depth chart analysis, career guidance, relationship insights, and life purpose clarity.</p>
+        <div class="service-card__footer">
+          <div>
+            <span class="service-card__price">₹5,000</span>
+            <span class="service-card__duration">/ 60 minutes</span>
+          </div>
+          <span class="btn btn--outline" style="padding: 0.6rem 1.25rem; font-size: 0.7rem;">Book Now</span>
+        </div>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-card__icon">✧</div>
+        <h3 class="service-card__title">Know Your Rashi</h3>
+        <p class="service-card__description">Discover your moon sign and its profound influence on your emotions, personality, and destiny through a detailed report.</p>
+        <div class="service-card__footer">
+          <div>
+            <span class="service-card__price">₹249</span>
+            <span class="service-card__duration">/ Digital Report</span>
+          </div>
+          <span class="btn btn--outline" style="padding: 0.6rem 1.25rem; font-size: 0.7rem;">Book Now</span>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+  
+  {% if section.settings.show_view_all and section.settings.collection != blank %}
+    <div class="text-center" style="margin-top: var(--spacing-xl);">
+      <a href="{{ section.settings.collection.url }}" class="btn btn--secondary">
+        {{ section.settings.view_all_text | default: 'View All Services' }}
+      </a>
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Featured Services",
+  "tag": "section",
+  "class": "section-featured-services",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Offerings"
+    },
+    {
+      "type": "text",
+      "id": "heading_part1",
+      "label": "Heading part 1",
+      "default": "Sacred"
+    },
+    {
+      "type": "text",
+      "id": "heading_part2",
+      "label": "Heading part 2 (italic)",
+      "default": "Services"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 2,
+      "label": "Products to show"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show 'View all' button",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "View all button text",
+      "default": "View All Services"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Services"
+    }
+  ]
+}
+{% endschema %}

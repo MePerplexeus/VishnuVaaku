@@ -1,0 +1,20 @@
+{% comment %}
+  Price Snippet - Vishnu Vaaku Theme
+  Usage: {% render 'price', product: product %}
+{% endcomment %}
+
+{% if product.price_varies %}
+  <span class="price price--from">
+    From {{ product.price_min | money }}
+  </span>
+{% else %}
+  <span class="price">
+    {{ product.price | money }}
+  </span>
+{% endif %}
+
+{% if product.compare_at_price_max > product.price %}
+  <span class="price price--compare">
+    {{ product.compare_at_price_max | money }}
+  </span>
+{% endif %}

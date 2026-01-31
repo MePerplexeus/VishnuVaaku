@@ -1,0 +1,66 @@
+{% comment %}
+  CTA Section - Vishnu Vaaku Theme
+{% endcomment %}
+
+<section class="section">
+  <div class="cta">
+    <h3 class="cta__title">
+      {{ section.settings.heading_part1 | default: 'Begin Your' }} 
+      <span class="text-accent text-italic">{{ section.settings.heading_part2 | default: 'Journey' }}</span>
+    </h3>
+    
+    {% if section.settings.description != blank %}
+      <p class="cta__description">{{ section.settings.description }}</p>
+    {% endif %}
+    
+    {% if section.settings.button_text != blank %}
+      <a href="{{ section.settings.button_link }}" class="btn btn--primary">
+        {{ section.settings.button_text }}
+      </a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Call to Action",
+  "tag": "section",
+  "class": "section-cta",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading_part1",
+      "label": "Heading part 1",
+      "default": "Begin Your"
+    },
+    {
+      "type": "text",
+      "id": "heading_part2",
+      "label": "Heading part 2 (italic)",
+      "default": "Journey"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Ready to discover what the cosmos has written for you? Let's explore your celestial blueprint together."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Schedule Consultation"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Call to Action"
+    }
+  ]
+}
+{% endschema %}

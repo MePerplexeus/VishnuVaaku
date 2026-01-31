@@ -1,0 +1,108 @@
+{% comment %}
+  FAQ Section - Vishnu Vaaku Theme
+{% endcomment %}
+
+<section class="section">
+  <div class="section__header">
+    {% if section.settings.subheading != blank %}
+      <p class="subheading">{{ section.settings.subheading }}</p>
+    {% endif %}
+    
+    <h2 class="section__title">
+      {{ section.settings.heading_part1 | default: 'Frequently' }} 
+      <span class="text-accent text-italic">{{ section.settings.heading_part2 | default: 'Asked' }}</span>
+    </h2>
+  </div>
+  
+  <div class="faq-list">
+    {% for block in section.blocks %}
+      <div class="faq-item" {{ block.shopify_attributes }}>
+        <h4 class="faq-item__question">{{ block.settings.question }}</h4>
+        <p class="faq-item__answer">{{ block.settings.answer }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "tag": "section",
+  "class": "section-faq",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Questions"
+    },
+    {
+      "type": "text",
+      "id": "heading_part1",
+      "label": "Heading part 1",
+      "default": "Frequently"
+    },
+    {
+      "type": "text",
+      "id": "heading_part2",
+      "label": "Heading part 2 (italic)",
+      "default": "Asked"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "How long does a consultation take?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "Personal consultations typically last 60 minutes, allowing ample time for detailed chart analysis and your questions."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ",
+      "blocks": [
+        {
+          "type": "faq",
+          "settings": {
+            "question": "How long does a consultation take?",
+            "answer": "Personal consultations typically last 60 minutes, allowing ample time for detailed chart analysis and your questions."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "What information do I need to provide?",
+            "answer": "Your birth date, exact birth time, and place of birth are required for accurate chart preparation."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Are consultations available in multiple languages?",
+            "answer": "Yes, consultations are available in English, Hindi, and Telugu."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "How will I receive my Know Your Rashi report?",
+            "answer": "Your detailed digital report will be delivered to your email within 24-48 hours of purchase."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

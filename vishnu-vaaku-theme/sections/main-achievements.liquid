@@ -1,0 +1,169 @@
+{% comment %}
+  Achievements Page Section - Vishnu Vaaku Theme
+  FIX #5: New achievements page for Vishnupriya S Soma
+{% endcomment %}
+
+<div class="achievements-header">
+  {% if section.settings.subheading != blank %}
+    <p class="subheading">{{ section.settings.subheading }}</p>
+  {% endif %}
+  
+  <h1>
+    {{ section.settings.heading_part1 | default: 'Achievements' }} 
+    <span class="text-accent text-italic">{{ section.settings.heading_part2 | default: '& Milestones' }}</span>
+  </h1>
+  
+  {% if section.settings.description != blank %}
+    <p style="max-width: 600px; margin: var(--spacing-md) auto 0;">{{ section.settings.description }}</p>
+  {% endif %}
+</div>
+
+<div class="achievements-grid">
+  {% for block in section.blocks %}
+    <div class="achievement-card" {{ block.shopify_attributes }}>
+      <div class="achievement-card__icon">
+        {{ block.settings.icon | default: '✧' }}
+      </div>
+      <h3 class="achievement-card__title">{{ block.settings.title }}</h3>
+      <p class="achievement-card__description">{{ block.settings.description }}</p>
+    </div>
+  {% endfor %}
+</div>
+
+{% if section.settings.show_cta %}
+  <div class="text-center" style="padding: 0 var(--spacing-md) var(--spacing-3xl);">
+    <div class="cta" style="max-width: 500px; margin: 0 auto;">
+      <h3 class="cta__title">
+        {{ section.settings.cta_title | default: 'Ready to Begin?' }}
+      </h3>
+      <p class="cta__description">{{ section.settings.cta_description | default: 'Let me guide you on your celestial journey.' }}</p>
+      <a href="{{ section.settings.cta_link }}" class="btn btn--primary">
+        {{ section.settings.cta_button | default: 'Book Consultation' }}
+      </a>
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Achievements Page",
+  "tag": "section",
+  "class": "section-achievements",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Journey & Recognition"
+    },
+    {
+      "type": "text",
+      "id": "heading_part1",
+      "label": "Heading part 1",
+      "default": "Achievements"
+    },
+    {
+      "type": "text",
+      "id": "heading_part2",
+      "label": "Heading part 2 (italic)",
+      "default": "& Milestones"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Page description",
+      "default": "A glimpse into the celestial journey of learning, growth, and service."
+    },
+    {
+      "type": "header",
+      "content": "Call to Action"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "Show call to action",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "CTA title",
+      "default": "Ready to Begin?"
+    },
+    {
+      "type": "text",
+      "id": "cta_description",
+      "label": "CTA description",
+      "default": "Let me guide you on your celestial journey."
+    },
+    {
+      "type": "text",
+      "id": "cta_button",
+      "label": "CTA button text",
+      "default": "Book Consultation"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "achievement",
+      "name": "Achievement",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (emoji or symbol)",
+          "default": "✧"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Achievement Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Describe this achievement or milestone."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Achievements Page",
+      "blocks": [
+        {
+          "type": "achievement",
+          "settings": {
+            "icon": "✧",
+            "title": "Vedic Astrology Certification",
+            "description": "Completed comprehensive training in traditional Vedic astrology."
+          }
+        },
+        {
+          "type": "achievement",
+          "settings": {
+            "icon": "☽",
+            "title": "500+ Consultations",
+            "description": "Successfully guided over 500 individuals through personal consultations."
+          }
+        },
+        {
+          "type": "achievement",
+          "settings": {
+            "icon": "★",
+            "title": "5-Star Rating",
+            "description": "Maintained excellent client satisfaction across all consultations."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

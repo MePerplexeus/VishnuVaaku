@@ -1,0 +1,190 @@
+{% comment %}
+  Contact Page Section - Vishnu Vaaku Theme
+  FIX #3: Added contact form
+{% endcomment %}
+
+<div class="page-header">
+  <p class="subheading">{{ section.settings.subheading | default: 'Get in Touch' }}</p>
+  <h1>{{ page.title }}</h1>
+  {% if section.settings.description != blank %}
+    <p style="max-width: 600px; margin: var(--spacing-md) auto 0;">{{ section.settings.description }}</p>
+  {% endif %}
+</div>
+
+<div class="page-content" style="max-width: 1000px;">
+  <div class="contact-form">
+    <h3 class="contact-form__title">
+      {{ section.settings.form_title | default: 'Send a Message' }}
+    </h3>
+    
+    {% form 'contact', class: 'contact-form__form' %}
+      {% if form.posted_successfully? %}
+        <div style="padding: var(--spacing-md); background: rgba(212, 165, 116, 0.15); border-radius: var(--border-radius-md); margin-bottom: var(--spacing-lg); text-align: center;">
+          <p style="color: var(--color-primary); margin: 0;">✧ {{ section.settings.success_message | default: 'Thank you for your message! I will get back to you soon.' }} ✧</p>
+        </div>
+      {% endif %}
+
+      {% if form.errors %}
+        <div style="padding: var(--spacing-md); background: rgba(200, 50, 50, 0.15); border-radius: var(--border-radius-md); margin-bottom: var(--spacing-lg);">
+          <p style="color: #e57373; margin: 0;">{{ form.errors | default_errors }}</p>
+        </div>
+      {% endif %}
+
+      <div class="contact-form__row">
+        <div class="form-group">
+          <label class="form-label" for="contact-name">{{ 'contact.form.name' | t }}</label>
+          <input 
+            type="text" 
+            id="contact-name" 
+            name="contact[name]" 
+            class="form-input"
+            placeholder="Your name"
+            value="{{ form.name }}"
+            required
+          >
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="contact-email">{{ 'contact.form.email' | t }}</label>
+          <input 
+            type="email" 
+            id="contact-email" 
+            name="contact[email]" 
+            class="form-input"
+            placeholder="your@email.com"
+            value="{{ form.email }}"
+            autocapitalize="off"
+            autocorrect="off"
+            required
+          >
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label" for="contact-phone">{{ 'contact.form.phone' | t }}</label>
+        <input 
+          type="tel" 
+          id="contact-phone" 
+          name="contact[phone]" 
+          class="form-input"
+          placeholder="+91 XXXXX XXXXX"
+          value="{{ form.phone }}"
+        >
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label" for="contact-subject">Subject</label>
+        <select id="contact-subject" name="contact[subject]" class="form-select">
+          <option value="General Inquiry">General Inquiry</option>
+          <option value="Personal Consultation">Personal Consultation</option>
+          <option value="Know Your Rashi">Know Your Rashi Report</option>
+          <option value="Collaboration">Collaboration</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label" for="contact-message">{{ 'contact.form.message' | t }}</label>
+        <textarea 
+          id="contact-message" 
+          name="contact[body]" 
+          class="form-textarea"
+          placeholder="How can I help you on your celestial journey?"
+          rows="6"
+          required
+        >{{ form.body }}</textarea>
+      </div>
+      
+      <button type="submit" class="btn btn--primary btn--full-width">
+        {{ 'contact.form.send' | t }}
+      </button>
+    {% endform %}
+  </div>
+  
+  {% if section.settings.show_info %}
+    <div style="margin-top: var(--spacing-2xl); text-align: center;">
+      <p class="subheading">Or Reach Out Directly</p>
+      {% if section.settings.email != blank %}
+        <p style="margin-bottom: var(--spacing-sm);">
+          <strong style="color: var(--color-primary);">Email:</strong> 
+          <a href="mailto:{{ section.settings.email }}" style="color: var(--color-text-secondary);">{{ section.settings.email }}</a>
+        </p>
+      {% endif %}
+      {% if section.settings.phone != blank %}
+        <p style="margin-bottom: var(--spacing-sm);">
+          <strong style="color: var(--color-primary);">Phone:</strong> 
+          <a href="tel:{{ section.settings.phone | replace: ' ', '' }}" style="color: var(--color-text-secondary);">{{ section.settings.phone }}</a>
+        </p>
+      {% endif %}
+      {% if section.settings.location != blank %}
+        <p>
+          <strong style="color: var(--color-primary);">Location:</strong> 
+          <span style="color: var(--color-text-secondary);">{{ section.settings.location }}</span>
+        </p>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Contact Page",
+  "tag": "section",
+  "class": "section-contact",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Get in Touch"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Page description",
+      "default": "Have questions about your cosmic journey? I'd love to hear from you."
+    },
+    {
+      "type": "header",
+      "content": "Form Settings"
+    },
+    {
+      "type": "text",
+      "id": "form_title",
+      "label": "Form title",
+      "default": "Send a Message"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thank you for your message! I will get back to you soon."
+    },
+    {
+      "type": "header",
+      "content": "Contact Information"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_info",
+      "label": "Show contact information",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email address"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone number"
+    },
+    {
+      "type": "text",
+      "id": "location",
+      "label": "Location"
+    }
+  ]
+}
+{% endschema %}

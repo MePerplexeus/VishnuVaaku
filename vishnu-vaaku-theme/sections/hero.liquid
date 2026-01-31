@@ -1,0 +1,137 @@
+{% comment %}
+  Hero Section - Vishnu Vaaku Theme
+  FIX #8: Align astrologer photo with "Celestial Guidance" title heading
+{% endcomment %}
+
+<section class="hero section">
+  <div class="hero__content">
+    {% if section.settings.subheading != blank %}
+      <p class="subheading">{{ section.settings.subheading }}</p>
+    {% endif %}
+    
+    <h1 class="hero__title">
+      {{ section.settings.heading_line1 | default: 'Celestial' }}<br>
+      <span class="text-accent text-italic">{{ section.settings.heading_line2 | default: 'Guidance' }}</span>
+    </h1>
+    
+    {% if section.settings.description != blank %}
+      <p class="hero__description">{{ section.settings.description }}</p>
+    {% endif %}
+    
+    <div class="hero__buttons">
+      {% if section.settings.button_1_text != blank %}
+        <a href="{{ section.settings.button_1_link }}" class="btn btn--primary">
+          {{ section.settings.button_1_text }}
+        </a>
+      {% endif %}
+      
+      {% if section.settings.button_2_text != blank %}
+        <a href="{{ section.settings.button_2_link }}" class="btn btn--secondary">
+          {{ section.settings.button_2_text }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+  
+  {% if section.settings.show_image %}
+    <div class="hero__image">
+      <div class="hero__image-frame"></div>
+      <div class="hero__image-inner">
+        {% if section.settings.image != blank %}
+          <img 
+            src="{{ section.settings.image | image_url: width: 760 }}" 
+            alt="{{ section.settings.image.alt | default: 'Astrologer' }}"
+            width="380"
+            height="480"
+            loading="eager"
+          >
+        {% else %}
+          <div class="hero__image-placeholder">☽</div>
+          <span class="hero__image-text">Astrologer Photo</span>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "tag": "section",
+  "class": "section-hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "✧ Vedic Wisdom for Modern Lives ✧"
+    },
+    {
+      "type": "text",
+      "id": "heading_line1",
+      "label": "Heading line 1",
+      "default": "Celestial"
+    },
+    {
+      "type": "text",
+      "id": "heading_line2",
+      "label": "Heading line 2 (italic)",
+      "default": "Guidance"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Navigate life's journey with ancient wisdom and cosmic insight. Personal consultations tailored to illuminate your unique path through the timeless science of Vedic astrology."
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "text",
+      "id": "button_1_text",
+      "label": "Button 1 text",
+      "default": "Book Consultation"
+    },
+    {
+      "type": "url",
+      "id": "button_1_link",
+      "label": "Button 1 link"
+    },
+    {
+      "type": "text",
+      "id": "button_2_text",
+      "label": "Button 2 text",
+      "default": "Know Your Rashi"
+    },
+    {
+      "type": "url",
+      "id": "button_2_link",
+      "label": "Button 2 link"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image",
+      "label": "Show hero image",
+      "default": true,
+      "info": "Image will be aligned with the title heading"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Astrologer image",
+      "info": "Recommended size: 760x960 pixels"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero"
+    }
+  ]
+}
+{% endschema %}

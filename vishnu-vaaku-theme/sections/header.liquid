@@ -1,0 +1,87 @@
+{% comment %}
+  Header Section - Vishnu Vaaku Theme
+{% endcomment %}
+
+<header class="header" role="banner">
+  <a href="{{ routes.root_url }}" class="header__logo" aria-label="{{ shop.name }}">
+    <div class="header__logo-icon">
+      {% if section.settings.logo != blank %}
+        <img src="{{ section.settings.logo | image_url: width: 44 }}" alt="{{ shop.name }}" width="44" height="44">
+      {% else %}
+        ✧
+      {% endif %}
+    </div>
+    <div class="header__logo-text">
+      <span class="header__logo-name">{{ section.settings.logo_text | default: shop.name }}</span>
+      {% if section.settings.tagline != blank %}
+        <span class="header__logo-tagline">{{ section.settings.tagline }}</span>
+      {% endif %}
+    </div>
+  </a>
+  
+  <nav class="header__nav" role="navigation" aria-label="{{ 'accessibility.main_navigation' | t }}">
+    {% for link in section.settings.menu.links %}
+      {% assign is_active = false %}
+      {% if link.active %}
+        {% assign is_active = true %}
+      {% endif %}
+      <a 
+        href="{{ link.url }}" 
+        class="header__nav-link{% if is_active %} header__nav-link--active{% endif %}"
+        {% if link.current %} aria-current="page"{% endif %}
+      >
+        {{ link.title }}
+      </a>
+    {% endfor %}
+  </nav>
+  
+  <button 
+    class="header__menu-toggle" 
+    aria-expanded="false" 
+    aria-controls="mobile-menu"
+    aria-label="{{ 'accessibility.menu' | t }}"
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+  {% for link in section.settings.menu.links %}
+    <a href="{{ link.url }}" class="mobile-menu__link">{{ link.title }}</a>
+  {% endfor %}
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "section-header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "default": "VISHNU VAAKU"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Celestial Guidance"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

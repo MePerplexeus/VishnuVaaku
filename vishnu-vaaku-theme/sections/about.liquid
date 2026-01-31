@@ -1,0 +1,93 @@
+{% comment %}
+  About Section - Vishnu Vaaku Theme
+{% endcomment %}
+
+<section class="section">
+  <div class="about">
+    <div class="about__image">
+      {% if section.settings.image != blank %}
+        <img 
+          src="{{ section.settings.image | image_url: width: 800 }}" 
+          alt="{{ section.settings.image.alt | default: section.settings.name }}"
+          loading="lazy"
+        >
+      {% else %}
+        <div class="about__image-placeholder">
+          <div class="about__image-icon">✧</div>
+          <span class="hero__image-text">Profile Image</span>
+        </div>
+      {% endif %}
+    </div>
+    
+    <div class="about__content">
+      {% if section.settings.subheading != blank %}
+        <p class="subheading">{{ section.settings.subheading }}</p>
+      {% endif %}
+      
+      <h2>
+        {{ section.settings.name_first | default: 'Vishnupriya' }} 
+        <span class="text-italic">{{ section.settings.name_last | default: 'S Soma' }}</span>
+      </h2>
+      
+      {% if section.settings.description != blank %}
+        <p>{{ section.settings.description }}</p>
+      {% endif %}
+      
+      {% if section.settings.quote != blank %}
+        <div class="about__quote">
+          <p>"{{ section.settings.quote }}"</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About",
+  "tag": "section",
+  "class": "section-about",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Your Guide"
+    },
+    {
+      "type": "text",
+      "id": "name_first",
+      "label": "Name (first part)",
+      "default": "Vishnupriya"
+    },
+    {
+      "type": "text",
+      "id": "name_last",
+      "label": "Name (last part - italic)",
+      "default": "S Soma"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Blending ancient Vedic wisdom with contemporary understanding, I offer clarity through the celestial language of the stars. With a mindful, analytical approach, each consultation becomes a journey into your unique cosmic blueprint."
+    },
+    {
+      "type": "text",
+      "id": "quote",
+      "label": "Quote",
+      "default": "The stars speak to those who listen with patience and an open heart."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Profile image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About"
+    }
+  ]
+}
+{% endschema %}

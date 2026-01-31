@@ -1,0 +1,74 @@
+{% comment %}
+  Main Cart Section - Vishnu Vaaku Theme
+{% endcomment %}
+
+<div class="page-header">
+  <h1>Your Cart</h1>
+</div>
+
+<div class="page-content" style="max-width: 900px;">
+  {% if cart.item_count > 0 %}
+    <form action="{{ routes.cart_url }}" method="post">
+      {% for item in cart.items %}
+        <div class="cart-item">
+          <div class="cart-item__image">
+            {% if item.image != blank %}
+              <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title }}">
+            {% else %}
+              <div style="width: 100%; height: 100%; background: linear-gradient(135deg, rgba(212, 165, 116, 0.1) 0%, rgba(77, 53, 64, 0.3) 100%); display: flex; align-items: center; justify-content: center;">
+                <span style="color: var(--color-primary);">☽</span>
+              </div>
+            {% endif %}
+          </div>
+          <div class="cart-item__details">
+            <h3 class="cart-item__title">{{ item.product.title }}</h3>
+            {% unless item.product.has_only_default_variant %}
+              <p style="color: var(--color-text-muted); font-size: 0.9rem;">{{ item.variant.title }}</p>
+            {% endunless %}
+            <p class="cart-item__price">{{ item.final_line_price | money }}</p>
+            <div style="margin-top: var(--spacing-sm);">
+              <label class="form-label" for="updates_{{ item.key }}">Quantity</label>
+              <input 
+                type="number" 
+                id="updates_{{ item.key }}" 
+                name="updates[]" 
+                value="{{ item.quantity }}" 
+                min="0"
+                class="form-input"
+                style="width: 80px;"
+              >
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      
+      <div style="margin-top: var(--spacing-xl); padding-top: var(--spacing-lg); border-top: 1px solid var(--color-border-light);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-md);">
+          <span style="font-size: 1.25rem;">Subtotal</span>
+          <span style="font-size: 1.5rem; color: var(--color-primary); font-weight: 500;">{{ cart.total_price | money }}</span>
+        </div>
+        <p style="color: var(--color-text-muted); font-size: 0.9rem; margin-bottom: var(--spacing-md);">Taxes and shipping calculated at checkout.</p>
+        <div style="display: flex; gap: var(--spacing-sm);">
+          <button type="submit" name="update" class="btn btn--secondary">Update Cart</button>
+          <button type="submit" name="checkout" class="btn btn--primary" style="flex: 1;">Checkout</button>
+        </div>
+      </div>
+    </form>
+  {% else %}
+    <div class="cart-empty">
+      <div class="cart-empty__icon">☽</div>
+      <h2>Your cart is empty</h2>
+      <p style="margin-bottom: var(--spacing-lg);">Discover our celestial services and begin your journey.</p>
+      <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary">Continue Shopping</a>
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Cart",
+  "tag": "section",
+  "class": "section-cart",
+  "settings": []
+}
+{% endschema %}
