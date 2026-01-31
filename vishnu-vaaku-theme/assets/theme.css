@@ -1102,3 +1102,115 @@ p {
 
 .article-content { max-width: 700px; margin: 0 auto; padding: 0 var(--spacing-md) var(--spacing-3xl); }
 .article-content img { max-width: 100%; height: auto; border-radius: var(--border-radius-lg); margin: var(--spacing-lg) 0; }
+
+/* === BOOKX APP BUTTON STYLING === */
+/* v1.2: Style BookX booking button to match theme */
+
+/* Target BookX and similar booking app buttons */
+.bookx-booking-button,
+.bookx-btn,
+[class*="bookx"] button,
+[class*="BookX"] button,
+.book-slot-button,
+.booking-button,
+.product__info button:not(.btn--primary),
+.product__form ~ div button,
+.product__form + div button,
+.shopify-app-block button,
+.product-form + div button,
+div[data-app] button,
+div[data-shopify-app] button,
+.product__info [data-app] button,
+.product__info .app-block button {
+  display: block !important;
+  width: 100% !important;
+  margin-top: var(--spacing-md) !important;
+  padding: 1rem 2rem !important;
+  background: transparent !important;
+  color: var(--color-primary) !important;
+  border: 2px solid var(--color-primary) !important;
+  border-radius: var(--border-radius-sm) !important;
+  font-family: var(--font-body) !important;
+  font-size: 0.9rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+  transition: all var(--transition-normal) !important;
+  box-sizing: border-box !important;
+  text-align: center !important;
+}
+
+.bookx-booking-button:hover,
+.bookx-btn:hover,
+[class*="bookx"] button:hover,
+[class*="BookX"] button:hover,
+.book-slot-button:hover,
+.booking-button:hover,
+.product__info button:not(.btn--primary):hover,
+.product__form ~ div button:hover,
+.product__form + div button:hover,
+.shopify-app-block button:hover,
+.product-form + div button:hover,
+div[data-app] button:hover,
+div[data-shopify-app] button:hover,
+.product__info [data-app] button:hover,
+.product__info .app-block button:hover {
+  background: var(--color-primary) !important;
+  color: var(--color-background) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 30px rgba(212, 165, 116, 0.3) !important;
+}
+
+/* BookX Widget Container */
+.bookx-widget,
+.bookx-container,
+[class*="bookx"],
+[class*="BookX"],
+.shopify-app-block,
+.product__info .app-block,
+div[data-app],
+div[data-shopify-app] {
+  margin-top: var(--spacing-md) !important;
+  padding: 0 !important;
+}
+
+/* Trust Badges */
+.product__trust-badges {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--color-border-light);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.trust-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+}
+
+.trust-badge__icon {
+  color: var(--color-primary);
+  font-size: 1rem;
+}
+
+/* Product Buy Now Button */
+.product__buy-now-btn {
+  font-size: 1rem !important;
+  padding: 1.25rem 2rem !important;
+}
+
+/* Mobile Adjustments for Trust Badges */
+@media (max-width: 768px) {
+  .product__trust-badges {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+}
